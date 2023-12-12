@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\Userscontroller;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\PostController;
 
 
 /*
@@ -19,6 +21,20 @@ use App\Http\Controllers\Userscontroller;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//posts routes
+route::get('createpost',[PostController::class,'create']);
+route::post('storepost',[PostController:: class, 'store'])->name('storepost');
+route:: get ('Posts',[PostController::class,'index']);
+
+
+
+//car routes
+route:: get ('createCar',[CarController::class,'create']);
+route:: post('storeCar',[CarController:: class, 'store'])->name('storeCar');
+route:: get ('Cars',[CarController::class,'index']);
+
+
 
 route ::get('login', function(){
     return view('login');
