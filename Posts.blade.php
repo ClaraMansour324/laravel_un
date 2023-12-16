@@ -19,6 +19,8 @@
         <th>description</th>
         <th>author</th>
         <th>published</th>
+        <th>edit</th>
+        <th> show</th>
       </tr>
     </thead>
     <tbody>
@@ -28,6 +30,8 @@
         <td>{{ $post->description }}</td>
         <td>{{ $post->author }}</td>
         <td>{{ $post->published ? 'Yes' : 'No' }}</td>
+        <td><a href="update/{{ $post->id}}">edit</a></td>
+        <td><a href="show/{{ $post->id}}">show</a></td>
       </tr>
      @endforeach
     </tbody>

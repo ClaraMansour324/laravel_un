@@ -27,12 +27,20 @@ route::get('createpost',[PostController::class,'create']);
 route::post('storepost',[PostController:: class, 'store'])->name('storepost');
 route:: get ('Posts',[PostController::class,'index']);
 
+route::get('edit/{id}',[PostController::class,'edit'])->name('edit');
+route::put('update/{id}',[PostController::class,'update'])->name('update');
+route::get('show/{id}',[PostController::class,'show'])->name('show');
+
+
 
 
 //car routes
 route:: get ('createCar',[CarController::class,'create']);
 route:: post('storeCar',[CarController:: class, 'store'])->name('storeCar');
 route:: get ('Cars',[CarController::class,'index']);
+route::get('updateCar/{id}',[CarController::class,'edit'])->name('updateCar');
+route::put('update/{id}',[CarController::class,'update'])->name('update');
+route::get('showCar/{id}',[CarController::class,'show'])->name('showCar');
 
 
 
