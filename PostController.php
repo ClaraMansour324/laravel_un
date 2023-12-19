@@ -13,7 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts=Post::get();
+        $posts = Post::get();
+        // select * from "posts" where "posts"."deleted_at" is null
         return view('posts',compact('posts'));
     }
 
@@ -83,6 +84,29 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $posts = Post::get();
+        return redirect('Posts');
+    }
+
+
+    // trashed list
+    public function trashed()
+    {
+        $posts = Post::onlyTrashed()->get();
+        return view ('trashedposts',compact('posts'));
+    }
+
+    //forcedelete
+    public function forceDelete(string $id)
+    {
+        $posts = Post::get();
+        return redirect('Posts');
+    }
+
+    //restore
+    public function restore(string $id)
+    {
+        $posts = Post::get();
+        return redirect('Posts');
     }
 }
