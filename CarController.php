@@ -97,7 +97,7 @@ class CarController extends Controller
     public function edit(string $id)
     {
         $car = Car::findOrFail($id);
-        $categories = Car::all();
+        $categories = Category::get();
         return view('updateCar',compact('car','categories'));   //car hna esm al variable f line 72
     }
 
