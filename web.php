@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\Userscontroller;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -25,12 +26,12 @@ Route::get('/', function () {
 //posts routes
 route::get('createpost',[PostController::class,'create']);
 route::post('storepost',[PostController:: class, 'store'])->name('storepost');
-route:: get ('Posts',[PostController::class,'index']);
+route:: get ('Posts',[PostController::class,'index'])->name('posts');
 
-route::get('edit/{id}',[PostController::class,'edit'])->name('edit');
-route::put('update/{id}',[PostController::class,'update'])->name('update');
-route::get('show/{id}',[PostController::class,'show'])->name('show');
-route::get('delete/{id}',[PostController::class,'destroy']);
+route::get('editPost/{id}',[PostController::class,'edit'])->name('editPost');
+route::put('updatePost/{id}',[PostController::class,'update'])->name('updatePost');
+route::get('showPost/{id}',[PostController::class,'show'])->name('showPost');
+route::get('deletePost/{id}',[PostController::class,'destroy']);
 route::get('trashedposts',[PostController::class,'trashed'])->name('trashedposts');
 route::get('forceDeleteposts/{id}',[PostController::class,'forceDelete'])->name('forceDeleteposts');
 route::get('restorePost/{id}',[PostController::class,'restore'])->name('restorePost');
@@ -40,7 +41,7 @@ route::get('restorePost/{id}',[PostController::class,'restore'])->name('restoreP
 
 
 //car routes
-route:: get ('createCar',[CarController::class,'create']);
+route:: get ('createCar',[CarController::class,'create'])->middleware('verified')->name('createCar');
 route:: post('storeCar',[CarController:: class, 'store'])->name('storeCar');
 route:: get ('Cars',[CarController::class,'index']);
 route::get('updateCar/{id}',[CarController::class,'edit'])->name('updateCar');
@@ -49,8 +50,11 @@ route::get('showCar/{id}',[CarController::class,'show'])->name('showCar');
 route::get('deleteCar/{id}',[CarController::class,'destroy']);
 route::get('trashed',[CarController::class,'trashed'])->name('trashed'); 
 route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete'); 
-route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar'); 
+route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar');
+ 
+route::post('uploadimage',[ExampleController::class,'upload'])->name('uploadimage'); 
 
+route::get('test20',[ExampleController::class,'createSession'])->name('createSession'); 
 
 
 route ::get('login', function(){
@@ -58,6 +62,32 @@ route ::get('login', function(){
 });
 
 route:: post('login',[Userscontroller:: class, 'store'])->name('logged');
+
+route::post('uploadimage',[ExampleController::class,'upload'])->name('uploadimage'); 
+
+
+
+
+route:: post('contact_mail',[HomeController::class,'contact_mail_send']);
+
+route::get('test',function(){
+    return view('test');
+});
+route::get('images',function(){
+    return view('images');
+});
+
+route::get('testHome',function(){
+    return view('testHome');
+});
+
+route::get('contact',function(){
+    return view('contact');
+})->name('contact');
+
+route::get('404',function(){
+    return view('404');
+})->name('404');
 
 // route ::post('login', function(){
 //     return 'you are logged in';
@@ -85,10 +115,6 @@ route:: post('login',[Userscontroller:: class, 'store'])->name('logged');
 // route :: fallback(function(){
 //         return redirect('/');
 //     });
-
-// route::get('test',function(){
-//     return'welcome to my first laravel website';
-// });
 
 // route::get('/test1/{id}',function($id){
 //     return'your id is : '. $id;
@@ -175,3 +201,7 @@ route:: post('login',[Userscontroller:: class, 'store'])->name('logged');
 //     })->whereIn('category',['pc', 'laptop', 'mobile']);
 // });
 
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
